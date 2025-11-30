@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import './TableComponent.scss'
-export default function TableComponent({ columns, data, onDelete, limit }) {
+export default function TableComponent({ columns, data, onDelete, onEdit,limit }) {
 
     useEffect(() => {
         /**Reset to first page on new data */
@@ -53,7 +53,11 @@ const safeData = Array.isArray(data) ? data : [];
                                 <td>{val.Name}</td>
                                 <td className="actions">
 
-                                    <i className="bi bi-pencil" style={{ paddingLeft:'10px'}}></i>
+                                    <i className="bi bi-pencil" style={{ paddingLeft:'10px'}}
+                                    onClick={() => {
+                                            onEdit(val.id);
+                                        }}
+                                    ></i>
                                     <i
                                         className="bi bi-trash" style={{color:'red', paddingLeft:'10px'}}
                                         onClick={() => {

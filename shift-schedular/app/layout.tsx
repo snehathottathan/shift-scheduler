@@ -6,6 +6,7 @@ import { Nav } from "./components/Nav";
 import "./styles/globals.css";
 import styles from "./styles/layout.module.css";
 import { NavBar } from "./components/NavBar/NavBar";
+import { Suspense,lazy } from "react";
 
 interface Props {
   readonly children: ReactNode;

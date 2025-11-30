@@ -14,7 +14,8 @@ export const NavBar = () => {
     <nav className="nav">
      
       <div className="nav-div">
-        <div></div>
+        <div className="logo-div"></div>
+
         <Link
           className={`${linkClassName} ${pathname === "/" ? activeClassName : ""}`}
           href="/"

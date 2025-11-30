@@ -36,15 +36,28 @@
 }
 .nav-div{
  padding: 12px;
-    background-color: #2b2730;
+    // background-color: #2b2730;
     flex-direction: column;
     justify-content: center;
     gap: 17px;
     // width: 19%;
-    height: 100vh;
+    // height: 100vh;
     display: flex;
+}
+.logo-div{
+ justify-content: center;
+    /* padding-left: 100px; */
+    display: flex;
+    /* padding: 17px; */
+    background-color: #ffffff0a;
+    width: 236px;
+    border-radius: 10px;
+    height: 104px;
+   
 }
 
 .nav{
      width: 22%;
+     background-color: #2b2730;
+      padding-top: 20px;
 }

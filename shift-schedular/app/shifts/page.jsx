@@ -1,9 +1,9 @@
 "use client";
 import { Quotes } from "../components/quotes/Quotes";
-import TableComponent from '../components/ui/TableComponent'
+import LazyTable from '../components/ui/LazyTable'
 import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
-import { addShift, upadateShift, deleteShift, loadShiftsFromStorage } from '../../lib/features/shift/shiftSlice'
+import { addShift, updateShift, deleteShift, loadShiftsFromStorage } from '../../lib/features/shift/shiftSlice'
 import { useEffect, useState } from "react";
 import './shift.scss'
 export default function ShiftComponent() {
@@ -16,12 +16,14 @@ export default function ShiftComponent() {
 
  const [searchText, setSearchText] = useState("");
 
+ const [editShift, setEditShift] =useState([])
+
   /**
    * 
    */
   const handleClose = () => {
     setOpen(false)
-
+  setEditShift(null);
     console.log("shifts", shifts);
 
   }
@@ -62,38 +64,32 @@ export default function ShiftComponent() {
    * 
    * @param {*} data 
    */
-  const handleSaveShift = (data) => {
+ const handleSaveShift = (data) => {
+  // --- EDIT ---
+  if (editShift) {
+    let updatedShift = { ...editShift, ...data };
 
-    dispatch(addShift(data))
+    dispatch(updateShift(updatedShift));
 
-    // Save to local storage (append to existing list)
-    const updated = [...shifts, data];
-    console.log("updated",updated);
-    
-    localStorage.setItem("shiftsdata", JSON.stringify(updated));
-
-  }
-
-  
-  /**
-   * 
-   * @param {*} id 
-   */
-  const onSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-
-    if (!value.trim()) {
-        setFilteredShifts([]); 
-        return;
-    }
-
-    const filtered = shifts.filter(item =>
-        (item.shiftName || "").toLowerCase().includes(value)
+    const updatedStorage = shifts.map(s => 
+      s.id === updatedShift.id ? updatedShift : s
     );
 
-    setFilteredShifts(filtered);
-};
+    localStorage.setItem("shiftsdata", JSON.stringify(updatedStorage));
+  } 
+  
+  // --- ADD ---
+  else {
+    const newShift = { id: Date.now(), ...data };
 
+    dispatch(addShift(newShift));
+
+    const updated = [...shifts, newShift];
+    localStorage.setItem("shiftsdata", JSON.stringify(updated));
+  }
+
+  setEditShift(null);
+};
 
 
   /**
@@ -111,6 +107,17 @@ export default function ShiftComponent() {
     localStorage.setItem("shiftsdata", JSON.stringify(filteredData))
   }
 
+  /**
+   * 
+   * @param {*} id 
+   */
+const onEdit = (id) => {
+  setOpen(true);
+  const shiftEdit = shifts.find(item => item.id === id);
+  setEditShift(shiftEdit || null);
+};
+
+
   return (
     <>
   
@@ -118,13 +125,14 @@ export default function ShiftComponent() {
         <input placeholder="search shift"
         onChange={(e) => setSearchText(e.target.value)}
         />
-        <button onClick={() => setOpen(true)}>Add new Shift</button>
+        <button className='add-shift'onClick={() => setOpen(true)}><b>+ Add New Shift</b></button>
       </div>
-      <TableComponent
+      <LazyTable
         columns={[{ title: "Shift" }]}
         data={filteredShifts.length ?filteredShifts :shifts}
         onDelete={onDelete}
-        limit={2}
+         onEdit={onEdit}
+        limit={5}
       />
       <ModalComponent
         open={open}
@@ -135,7 +143,7 @@ export default function ShiftComponent() {
 
         ]}
         saveButtonName={'Save shift'}
-        // data={shifts}
+         data={editShift}     
         onSave={handleSaveShift}
       />
     </>

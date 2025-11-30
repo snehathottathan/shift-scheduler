@@ -1,13 +1,11 @@
 "use client";
 
 import './ModalComponent.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function ModalComponent({ open, onClose, title, fields = [],saveButtonName, onSave }) {
+export default function ModalComponent({ open, onClose, title, fields = [],saveButtonName,data, onSave }) {
 
     const [formData, setFormData] = useState({});
-
-    if (!open) return null;
 
     const handleChange = (e, name) => {
         setFormData(prev => ({
@@ -23,6 +21,25 @@ export default function ModalComponent({ open, onClose, title, fields = [],saveB
         setFormData({})             
     }
 
+       useEffect(()=>{
+
+
+        if(data){
+
+            setFormData(data)
+        }else{
+
+            setFormData({})
+        }
+    },[data])
+
+
+    if (!open) {
+
+        return null;
+    }
+
+
     return (
         <div className="modal">
             <div className="modal-box">
@@ -34,7 +51,7 @@ export default function ModalComponent({ open, onClose, title, fields = [],saveB
                                 key={field.name}
                                 type={field.type || 'text'}
                                 placeholder={field.placeholder || ''}
-                                value={formData[field.name] || ''}
+                       value={formData[field.name] || ""}  
                                 onChange={(e) => handleChange(e, field.name)}
                             />
                         ))}

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 /**Initial state to store shift */
 const initialState = {
-    list: []
+  list: []
 }
 
 /**
@@ -10,21 +10,21 @@ const initialState = {
  */
 const shiftSlice = createSlice({
 
-    name: 'shiftslice',
+  name: 'shiftslice',
 
-    initialState,
+  initialState,
 
-    reducers: {
+  reducers: {
 
-        addShift: (state, action) => {
+    addShift: (state, action) => {
 
-            state.list.push({ id: Date.now(), ...action.payload })
-        },
-        loadShiftsFromStorage: (state, action) => {
+      state.list.push({ id: Date.now(), ...action.payload })
+    },
+    loadShiftsFromStorage: (state, action) => {
       state.list = action.payload;
     },
 
-       updateShift: (state, action) => {
+    updateShift: (state, action) => {
       const index = state.list.findIndex(s => s.id === action.payload.id);
       if (index !== -1) {
         state.list[index] = { ...state.list[index], ...action.payload };
@@ -34,8 +34,8 @@ const shiftSlice = createSlice({
     deleteShift: (state, action) => {
       state.list = state.list.filter(item => item.id !== action.payload.id);
     }
-    }
+  }
 })
 
-export const {addShift,upadateShift,deleteShift,loadShiftsFromStorage} = shiftSlice.actions;
+export const { addShift, updateShift, deleteShift, loadShiftsFromStorage } = shiftSlice.actions;
 export default shiftSlice;
