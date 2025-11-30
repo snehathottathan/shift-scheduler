@@ -1,14 +1,19 @@
 
 .link:hover {
   text-decoration: none;
-    padding-left: 51px;
+  height: 39px;
+    padding-top: 10px;
+    padding-left: 26px;
     
 }
 
 .link {
-  color: #704cb6;
-    padding-left: 51px;
+  color: #F2F2F8BF;
+    // padding-left: 51px;
     // width: 350px;
+    height: 39px;
+    padding-top: 10px;
+    padding-left: 26px;
     
 }
 
@@ -24,13 +29,22 @@
     text-decoration: none;
 }
 
+.link-icons{
+
+  display: flex;
+  gap: 12px;
+}
 .nav-div{
  padding: 12px;
     background-color: #2b2730;
     flex-direction: column;
     justify-content: center;
-    gap: 26px;
-    width: 19%;
+    gap: 17px;
+    // width: 19%;
     height: 100vh;
     display: flex;
+}
+
+.nav{
+     width: 22%;
 }

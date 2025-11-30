@@ -12,13 +12,14 @@ export const NavBar = () => {
 
   return (
     <nav className="nav">
-      <div></div>
+     
       <div className="nav-div">
+        <div></div>
         <Link
           className={`${linkClassName} ${pathname === "/" ? activeClassName : ""}`}
           href="/"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className='link-icons' >
             <i className="bi bi-calendar4-week"></i>
             Dashboard
           </div>
@@ -28,7 +29,7 @@ export const NavBar = () => {
           className={`${linkClassName} ${pathname === "/shifts" ? activeClassName : ""}`}
           href="/shifts"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className='link-icons'>
             <i className="bi bi-calendar4-week"></i>
             Shifts
           </div>
@@ -37,7 +38,7 @@ export const NavBar = () => {
           className={`${linkClassName} ${pathname === "/blocks" ? activeClassName : ""}`}
           href="/blocks"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className='link-icons'>
             <i className="bi bi-calendar4-week"></i>
             Blocks
           </div>
@@ -46,7 +47,7 @@ export const NavBar = () => {
           className={`${linkClassName} ${pathname === "/rooms" ? activeClassName : ""}`}
           href="/rooms"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className='link-icons'>
             <i className="bi bi-calendar4-week"></i>
             Rooms
           </div>
@@ -55,7 +56,7 @@ export const NavBar = () => {
           className={`${linkClassName} ${pathname === "/roomschedule" ? activeClassName : ""}`}
           href="/roomschedule"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div className='link-icons'>
             <i className="bi bi-calendar4-week"></i>
             Room Schedule
           </div>

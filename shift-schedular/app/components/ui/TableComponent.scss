@@ -1,0 +1,54 @@
+table{
+    width: 100%;
+    padding: 44px;
+}
+td{
+    text-align: left;
+    border-bottom: 1px solid #E6E6EF;
+        height: 40px;
+}
+
+.actions{
+    width: 100px;
+   
+}
+
+tr{
+    text-align: left;
+        height: 40px;
+}
+
+tr:nth-child(odd) {
+      background-color: #fafafa; // light color for odd rows
+    }
+
+     tr:nth-child(even) {
+      background-color: #ffffff; // white for even rows
+    }
+th{
+    border-bottom: 1px solid #E6E6EF;
+    text-align: left;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 44px;
+}
+
+.bi-pencil::before {
+    align-items: center;
+    /* display: flex; */
+    flex-direction: row;
+    background-color: #E6E6E6;
+    width: 24px;
+    border-radius: 50%;
+    height: 24px;
+    cursor: pointer;
+}
+
+.bi{
+     cursor: pointer;
+}

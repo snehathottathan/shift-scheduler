@@ -20,18 +20,22 @@ const shiftSlice = createSlice({
 
             state.list.push({ id: Date.now(), ...action.payload })
         },
+        loadShiftsFromStorage: (state, action) => {
+      state.list = action.payload;
+    },
 
-        upadateShift: (state, action) => {
+       updateShift: (state, action) => {
+      const index = state.list.findIndex(s => s.id === action.payload.id);
+      if (index !== -1) {
+        state.list[index] = { ...state.list[index], ...action.payload };
+      }
+    },
 
-            const index = state.list.findIndex(s => s.id === action.payload.id);
-            if (index !== -1) state.list[index] = action.payload;
-
-        },
-        deleteShift: (state, action) => {
-            state.list = state.list.filter((data) => data.id !== action.payload.id)
-        }
+    deleteShift: (state, action) => {
+      state.list = state.list.filter(item => item.id !== action.payload.id);
+    }
     }
 })
 
-export const {addShift,upadateShift,deleteShift} = shiftSlice.actions;
-export default shiftSlice.reducer;
+export const {addShift,upadateShift,deleteShift,loadShiftsFromStorage} = shiftSlice.actions;
+export default shiftSlice;

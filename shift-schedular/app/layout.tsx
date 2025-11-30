@@ -24,7 +24,11 @@ export default function RootLayout({ children }: Props) {
 
             {/* 1. Left Fixed Sidebar (Nav) */}
             <NavBar />
+            <div className={styles.left}>
+             <div className={styles.header}></div>
             <main className={styles.main}>{children}</main>
+
+            </div>
 
 
           </section>
