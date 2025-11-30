@@ -1,5 +1,5 @@
 "use client";
-import { Quotes } from "../components/quotes/Quotes";
+
 import LazyTable from '../components/ui/LazyTable'
 import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
@@ -121,11 +121,11 @@ const onEdit = (id) => {
   return (
     <>
   
-      <div className="shift-head">
-        <input placeholder="search shift"
+      <div className="head-part">
+        <input placeholder="search -hift"
         onChange={(e) => setSearchText(e.target.value)}
         />
-        <button className='add-shift'onClick={() => setOpen(true)}><b>+ Add New Shift</b></button>
+        <button className='add-button'onClick={() => setOpen(true)}><b>+ Add New Shift</b></button>
       </div>
       <LazyTable
         columns={[{ title: "Shift" }]}

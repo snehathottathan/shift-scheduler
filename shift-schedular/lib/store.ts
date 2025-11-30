@@ -1,18 +1,20 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
-import { quotesApiSlice } from "./features/quotes/quotesApiSlice";
+// import { quotesApiSlice } from "./features/quotes/quotesApiSlice";
 import shiftSlice from "./features/shift/shiftSlice";
-
+import blockSlice from "./features/block/blockSlice";
 // Combine reducers (shiftSlice + RTK Query slice)
 const rootReducer = combineSlices(
   shiftSlice,
-  quotesApiSlice
+  blockSlice
+  
+  // quotesApiSlice
 );
 
 // Create the Redux store (supports SSR for Next.js)
 export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(quotesApiSlice.middleware),
+    // middleware: (getDefaultMiddleware) =>
+    //   getDefaultMiddleware().concat(quotesApiSlice.middleware),
   });
 };

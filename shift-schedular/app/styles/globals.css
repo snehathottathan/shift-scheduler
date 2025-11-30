@@ -15,3 +15,23 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.head-part{
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 44px;
+}
+
+.add-button{
+    color: #fff;
+    cursor: pointer;
+    background-color: #9575de;
+    border: 0;
+    border-radius: 4px;
+    width: 162px;
+    height: 29px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
