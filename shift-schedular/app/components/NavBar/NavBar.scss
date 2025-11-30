@@ -1,0 +1,36 @@
+
+.link:hover {
+  text-decoration: none;
+    padding-left: 51px;
+    
+}
+
+.link {
+  color: #704cb6;
+    padding-left: 51px;
+    // width: 350px;
+    
+}
+
+.link.active {
+ padding-top: 10px;
+    /* text-align: center; */
+    border-radius: 10px;
+    height: 39px;
+    
+    color: #9575de;
+    background-color: #fff;
+        padding-left: 26px;
+    text-decoration: none;
+}
+
+.nav-div{
+ padding: 12px;
+    background-color: #2b2730;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+    width: 19%;
+    height: 100vh;
+    display: flex;
+}
