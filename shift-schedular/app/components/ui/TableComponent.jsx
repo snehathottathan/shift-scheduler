@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import './TableComponent.scss'
-export default function TableComponent({ columns, data, onDelete, onEdit,limit }) {
+export default function TableComponent({ columns, data, onDelete, onEdit, limit }) {
 
     useEffect(() => {
         /**Reset to first page on new data */
@@ -14,7 +14,7 @@ export default function TableComponent({ columns, data, onDelete, onEdit,limit }
 
     /**Find total pages */
     const totalPages = Math.ceil(data.length / limit)
-const safeData = Array.isArray(data) ? data : [];
+    const safeData = Array.isArray(data) ? data : [];
     // Get only the rows for the current page
     const paginatedData = safeData?.slice(
         (currentPage - 1) * limit,
@@ -46,20 +46,26 @@ const safeData = Array.isArray(data) ? data : [];
                 </thead>
                 <tbody>
 
-                    {paginatedData&&paginatedData.map((val) => {
+                    {paginatedData && paginatedData.map((val, key) => {
                         return (
 
-                            <tr>
-                                <td>{val.Name}</td>
+                            <tr key={val.id}>
+
+                                {columns.map(col => (
+                                    <td key={col.key}>
+                                       
+                                        {val[col.key] ?? "—"}
+                                    </td>
+                                ))}
                                 <td className="actions">
 
-                                    <i className="bi bi-pencil" style={{ paddingLeft:'10px'}}
-                                    onClick={() => {
+                                    <i className="bi bi-pencil" style={{ paddingLeft: '10px' }}
+                                        onClick={() => {
                                             onEdit(val.id);
                                         }}
                                     ></i>
                                     <i
-                                        className="bi bi-trash" style={{color:'red', paddingLeft:'10px'}}
+                                        className="bi bi-trash" style={{ color: 'red', paddingLeft: '10px' }}
                                         onClick={() => {
                                             onDelete(val.id);
                                         }}

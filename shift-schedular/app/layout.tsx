@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
 import Head from "next/head";
 import "./styles/globals.css";
 import styles from "./styles/layout.module.css";
@@ -17,10 +16,10 @@ export default function RootLayout({ children }: Props) {
     <StoreProvider>
       <html lang="en">
         <body>
-          <Head>
+          {/* <head> */}
             {/* Bootstrap Icons CDN */}
            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"/>
-          </Head>
+          {/* </head> */}
           <section className={styles.container}>
 
             {/* 1. Left Fixed Sidebar (Nav) */}

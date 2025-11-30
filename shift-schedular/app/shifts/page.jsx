@@ -5,7 +5,7 @@ import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
 import { addShift, updateShift, deleteShift, loadShiftsFromStorage } from '../../lib/features/shift/shiftSlice'
 import { useEffect, useState } from "react";
-import './shift.scss'
+
 export default function ShiftComponent() {
 
   const dispatch = useDispatch();
@@ -128,7 +128,7 @@ const onEdit = (id) => {
         <button className='add-button'onClick={() => setOpen(true)}><b>+ Add New Shift</b></button>
       </div>
       <LazyTable
-        columns={[{ title: "Shift" }]}
+        columns={[{ key: "Name",title: "Shift" }]}
         data={filteredShifts.length ?filteredShifts :shifts}
         onDelete={onDelete}
          onEdit={onEdit}

@@ -142,7 +142,7 @@ const onEdit = (id) => {
         <button className='add-button'onClick={() => setOpen(true)}><b>+ Add New Block</b></button>
       </div>
       <LazyTable
-        columns={[{ title: "Blocks" }]}
+        columns={[{ key: "Name",title: "Blocks" }]}
         data={filteredBlocks.length ?filteredBlocks :blocks}
         onDelete={onDelete}
          onEdit={onEdit}

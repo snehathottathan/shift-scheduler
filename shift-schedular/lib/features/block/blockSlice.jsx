@@ -20,6 +20,7 @@ const blockSlice = createSlice({
 
       state.list.push({ id: Date.now(), ...action.payload })
     },
+    
     loadBlocksFromStorage: (state, action) => {
       state.list = action.payload;
     },

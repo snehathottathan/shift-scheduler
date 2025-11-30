@@ -3,9 +3,14 @@
 import './ModalComponent.scss'
 import { useEffect, useState } from 'react';
 
-export default function ModalComponent({ open, onClose, title, fields = [],saveButtonName,data, onSave }) {
+export default function ModalComponent({ open, onClose, title, fields = [],options, saveButtonName, data, onSave }) {
 
     const [formData, setFormData] = useState({});
+
+    useEffect(()=>{
+
+console.log("optionsoptions",options);
+    },[])
 
     const handleChange = (e, name) => {
         setFormData(prev => ({
@@ -16,22 +21,21 @@ export default function ModalComponent({ open, onClose, title, fields = [],saveB
 
     const handleSave = (e) => {
         e.preventDefault();
-        if (onSave) onSave(formData);  
-        onClose();  
-        setFormData({})             
+        if (onSave) onSave(formData);
+        onClose();
+        setFormData({})
     }
 
-       useEffect(()=>{
+    useEffect(() => {
 
-
-        if(data){
+        if (data) {
 
             setFormData(data)
-        }else{
+        } else {
 
             setFormData({})
         }
-    },[data])
+    }, [data])
 
 
     if (!open) {
@@ -46,15 +50,55 @@ export default function ModalComponent({ open, onClose, title, fields = [],saveB
                 <div><b>{title}</b></div>
                 <form className='form-class'>
                     <div className='form-div'>
-                        {fields.map(field => (
-                            <input className='input-class'
-                                key={field.name}
-                                type={field.type || 'text'}
-                                placeholder={field.placeholder || ''}
-                       value={formData[field.name] || ""}  
-                                onChange={(e) => handleChange(e, field.name)}
-                            />
-                        ))}
+
+                        {fields.map((field) => {
+                            /** SELECT field */
+                            if (field.type === "select") {
+                                return (
+                                    <select
+                                        key={field.name}
+                                        className="input-class"
+                                        value={formData[field.name] || ""}
+                                        onChange={(e) => handleChange(e, field.name)}
+                                    >
+                                       
+                                        <option value="">-- Select {field.placeholder || field.name} --</option>
+
+                                        {options?.map((opt) => (
+                                            <option key={opt.Name} value={opt.Name}>
+                                                {opt.Name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                );
+                            }
+
+                            /** TEXTAREA field */
+                            if (field.type === "textarea") {
+                                return (
+                                    <textarea
+                                        key={field.name}
+                                        className="input-class textarea-class"
+                                        placeholder={field.placeholder}
+                                        value={formData[field.name] || ""}
+                                        onChange={(e) => handleChange(e, field.name)}
+                                    />
+                                );
+                            }
+
+                            /** DEFAULT: INPUT */
+                            return (
+                                <input
+                                    key={field.name}
+                                    className="input-class"
+                                    type={field.type || "text"}
+                                    placeholder={field.placeholder}
+                                    value={formData[field.name] || ""}
+                                    onChange={(e) => handleChange(e, field.name)}
+                                />
+                            );
+                        })}
+
                     </div>
                     <div className='modal-button'>
                         <button className="button-close" onClick={onClose}>Close</button>
