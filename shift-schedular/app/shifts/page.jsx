@@ -160,7 +160,7 @@ export default function ShiftComponent() {
 
         />
 
-        <button className='add-button' onClick={() => setOpen(true)}><b>+ Add New Shift</b></button>
+        <button className='add-button' onClick={() => { setEditShift(null); setOpen(true); }}><b>+ Add New Shift</b></button>
 
       </div>
 
