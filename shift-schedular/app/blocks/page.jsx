@@ -203,7 +203,7 @@ export default function BlocksComponent() {
 
         fields={[
 
-          { name: 'Name', placeholder: 'Block Name', type: 'text' },
+          { name: 'Name', placeholder: 'Block Name', type: 'text',required:'true'  },
 
         ]}
 
@@ -212,6 +212,8 @@ export default function BlocksComponent() {
         data={editBlock}
 
         onSave={handleSaveBlocks}
+
+          lists={blocks}  
       />
     </>
   );

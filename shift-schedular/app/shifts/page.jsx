@@ -188,7 +188,7 @@ export default function ShiftComponent() {
         title={'Shift Modal'}
 
         fields={[
-          { name: 'Name', placeholder: 'Shift Name', type: 'text' },
+          { name: 'Name', placeholder: 'Shift Name', type: 'text',required:'true' },
 
         ]}
 
@@ -197,6 +197,8 @@ export default function ShiftComponent() {
         data={editShift}
 
         onSave={handleSaveShift}
+
+         lists={shifts}  
 
       />
 

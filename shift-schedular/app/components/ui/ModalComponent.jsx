@@ -1,73 +1,110 @@
 /**
- * @author Sneha T
+ * @author Sneha
  */
-
 "use client";
 
-import './ModalComponent.scss'
+import "./ModalComponent.scss";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-
-export default function ModalComponent({ open, onClose, title, fields = [],options, saveButtonName, data, onSave }) {
+export default function ModalComponent({
+    open,
+    onClose,
+    title,
+    fields = [],
+    options,
+    saveButtonName,
+    data,
+    onSave,
+    lists = []
+}) {
 
     const [formData, setFormData] = useState({});
 
-/**
- * 
- * @param {*} e 
- * @param {*} name 
- */
+    const [errors, setErrors] = useState({});
+
+    /** Handle input change */
     const handleChange = (e, name) => {
 
-        setFormData(prev => ({
+        setFormData((prev) => ({ ...prev, [name]: e.target.value }));
 
-            ...prev,
+        setErrors((prev) => ({ ...prev, [name]: "" }));
 
-            [name]: e.target.value
+    };
 
-        }));
-
-    }
-
-/**
- * 
- * @param {*} e 
- * 
- */
+    /** Save handler */
     const handleSave = (e) => {
-        
+
         e.preventDefault();
-     
-        if (onSave) onSave(formData);
+
+        const newErrors = {};
+
+        const nameValue = formData["Name"]?.trim().toLowerCase() || "";
+
+        /** Required field validation */
+        fields.forEach((field) => {
+            if (
+                field.required &&
+                (!formData[field.name] || formData[field.name].trim() === "")
+            ) {
+                newErrors[field.name] = `${field.placeholder || field.name} is required`;
+            }
+        });
+
+        /** Duplicate validation */
+        const exists = lists.some(
+
+            (item) => item.Name.toLowerCase() === nameValue
+        );
+
+        if (exists) {
+            newErrors["Name"] = "This name already exists.";
+        }
+
+        /** If any errors exist, stop */
+        if (Object.keys(newErrors).length > 0) {
+
+            setErrors(newErrors);
+
+            return;
+        }
+
+        /** Save data */
+
+        onSave?.(formData);
+
+        /** Cleanup */
+        resetState();
 
         onClose();
+    };
 
-        setFormData({})
+    /** Reset form & errors */
+    const resetState = () => {
 
-    }
-/**
- * 
- */
+        setFormData({});
+
+        setErrors({});
+    };
+
+    /** Reset form when modal opens/closes or data changes */
     useEffect(() => {
 
-        if (data) {
+        if (open) {
 
-            setFormData(data)
+            setErrors({});
+
+            setFormData(data || {});
 
         } else {
 
-            setFormData({})
+            resetState();
+
         }
+    }, [open, data?.Name]);
 
-    }, [data])
 
-
-    if (!open) {
-
-        return null;
-    }
-
+    if (!open) return null;
 
     return (
 
@@ -75,32 +112,34 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
 
             <div className="modal-box">
 
-                <div><b>{title}</b></div>
+                <div>
+                    <b>{title}</b>
+                </div>
 
-                <form className='form-class'>
+                <form className="form-class" onSubmit={handleSave}>
 
-                    <div className='form-div'>
+                    <div className="form-div">
 
-                        {fields.map((field) => {
+                        {fields.map((field) => (
 
-                            /** SELECT field */
-                            if (field.type === "select") {
+                            <div key={field.name} className="field-wrapper">
 
-                                return (
+                                {/* SELECT FIELD */}
+                                {field.type === "select" ? (
 
                                     <select
 
-                                        key={field.name}
-
-                                        className="input-class"
+                                        className={`input-class ${errors[field.name] ? "input-error" : ""}`}
 
                                         value={formData[field.name] || ""}
 
                                         onChange={(e) => handleChange(e, field.name)}
-                                        
+
                                     >
-                                       
-                                        <option value="">-- Select {field.placeholder || field.name} --</option>
+                                        <option value="">
+
+                                            -- Select {field.placeholder || field.name} --
+                                        </option>
 
                                         {options?.map((opt) => (
 
@@ -113,20 +152,12 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
                                         ))}
 
                                     </select>
-                             
-                                );
-                            }
 
-                            /** TEXTAREA field */
-                            if (field.type === "textarea") {
-
-                                return (
+                                ) : field.type === "textarea" ? (
 
                                     <textarea
 
-                                        key={field.name}
-
-                                        className="input-class textarea-class"
+                                        className={`input-class textarea-class ${errors[field.name] ? "input-error" : ""}`}
 
                                         placeholder={field.placeholder}
 
@@ -136,40 +167,57 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
 
                                     />
 
-                                );
+                                ) : (
+                                    <input
 
-                            }
+                                        className={`input-class ${errors[field.name] ? "input-error" : ""}`}
 
-                            /** DEFAULT: INPUT */
-                            return (
+                                        type={field.type || "text"}
 
-                                <input
+                                        placeholder={field.placeholder}
 
-                                    key={field.name}
+                                        value={formData[field.name] || ""}
 
-                                    className="input-class"
+                                        onChange={(e) => handleChange(e, field.name)}
 
-                                    type={field.type || "text"}
+                                    />
+                                )}
 
-                                    placeholder={field.placeholder}
+                                {/* ERROR MESSAGE */}
+                                {errors[field.name] && (
 
-                                    value={formData[field.name] || ""}
+                                    <p className="error-text">{errors[field.name]}</p>
 
-                                    onChange={(e) => handleChange(e, field.name)}
+                                )}
 
-                                />
+                            </div>
 
-                            );
-
-                        })}
+                        ))}
 
                     </div>
 
-                    <div className='modal-button'>
+                    <div className="modal-button">
 
-                        <button className="button-close" onClick={onClose}>Close</button>
+                        <button
 
-                        <button type="submit" className="save" onClick={handleSave}>{saveButtonName}</button>
+                            type="button"
+
+                            className="button-close"
+
+                            onClick={() => {
+
+                                resetState();
+                                onClose();
+
+                            }}
+
+                        >
+                            Close
+                        </button>
+
+                        <button type="submit" className="save">
+                            {saveButtonName}
+                        </button>
 
                     </div>
 
@@ -179,5 +227,5 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
 
         </div>
 
-    )
+    );
 }

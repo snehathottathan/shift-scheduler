@@ -1,7 +1,7 @@
 export default  function DashBoardPage(){
  return(
     <>
-    <h1>DashBoardPage</h1>
+    <h1></h1>
     </>
  )
 

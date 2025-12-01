@@ -215,8 +215,8 @@ export default function RoomsComponent() {
 
         fields={[
 
-          { name: 'Name', placeholder: 'Room Name', type: 'text' },
-          { name: 'blocks', placeholder: 'Blocks', type: 'select' },
+          { name: 'Name', placeholder: 'Room Name', type: 'text',required:'true' },
+          { name: 'blocks', placeholder: 'Blocks', type: 'select',required:'true' },
 
         ]}
 
@@ -227,6 +227,8 @@ export default function RoomsComponent() {
         data={editRooms}
 
         onSave={handleSaveRooms}
+
+       lists={rooms}  
 
       />
 
