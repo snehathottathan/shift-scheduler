@@ -17,7 +17,7 @@ const roomSlice = createSlice({
    reducers : {
 
     addRooms : (state, action) =>{
-        state.list.push({id: uuidv4(),...action.payload})
+        state.list.push({...action.payload})
     },
 
      loadRoomsFromStorage: (state, action) => {
