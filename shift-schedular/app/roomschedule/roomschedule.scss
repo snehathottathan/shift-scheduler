@@ -19,7 +19,6 @@
     font-size: 14px;
   }
 
-  /* Block header (Old Building, New Building) */
   .block-header {
      text-align: center;
     background-color: #e8e8e8;
@@ -35,7 +34,7 @@
     font-size: 14px;
   }
 
-  /* Day header row (gray bar) */
+
   .day-header {
     justify-content: center;
     display: flex;
@@ -46,7 +45,6 @@
     padding-left: 8px;
   }
 
-  /* Shift label column */
   .shift-cell {
      text-align: center;
     background-color: #f3f3f3;
@@ -57,7 +55,7 @@
   /* Empty cells (yellow) */
   .empty-cell {
      text-align: center;
-    background-color: #f3e96b; /* soft yellow */
+    background-color: #f3e96b; 
     cursor: pointer;
     transition: 0.2s;
 
@@ -69,7 +67,7 @@
   /* Filled cells (green) */
   .filled-cell {
      text-align: center;
-    background-color: #7ed957; /* soft green */
+    background-color: #7ed957;
     cursor: pointer;
     transition: 0.2s;
 

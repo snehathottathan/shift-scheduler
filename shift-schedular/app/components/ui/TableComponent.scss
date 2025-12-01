@@ -23,11 +23,11 @@ tr{
 }
 
 tr:nth-child(odd) {
-      background-color: #fafafa; // light color for odd rows
+      background-color: #fafafa; 
     }
 
      tr:nth-child(even) {
-      background-color: #ffffff; // white for even rows
+      background-color: #ffffff; 
     }
 th{
     border-bottom: 1px solid #E6E6EF;
@@ -75,44 +75,32 @@ th{
      cursor: pointer;
 }
 
-/* Add a transition property to all table rows */
+
 table tbody tr {
-    // Smooth transition for all changes (color, transform, shadow)
+ 
     transition: all 0.2s ease-in-out; 
-    
-    // Ensure the row is positioned correctly for the z-index to work
+ 
     position: relative; 
-    
-    // Add a slight padding to the cells to prevent content overlap during zoom
+
     td {
-        padding: 10px 15px; // Adjust as needed
+        padding: 10px 15px; 
     }
 }
 
 /* The actual hover effect */
 table tbody tr:hover {
-    // 1. Zoom/Lift Effect: Scale the row up slightly
+  
     transform: scale(1.005); 
-    
-    // 2. Shadow Effect: Add a subtle drop shadow to lift the row visually
+
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    
-    // 3. Stack order: Bring the hovered row to the front so it's not clipped by others
+
     z-index: 10; 
     
-    // 4. Highlight Color (Optional): Change the background for extra emphasis
-    // This color will override the nth-child striping on hover only.
-    // background-color: #e0f7ff !important; // A light blue highlight
 }
 
-/* IMPORTANT: If you are using alternating row colors, you might 
-need to adjust the specificity for the hover effect to work seamlessly. */
 
-
-// Make sure the hover effect applies to the cells as well
 table tbody tr:hover td {
      border-right: 1px solid #E6E6E6;
-    // Apply the hover background to the cells
-    // background-color: #ececec !important;
+
     
 }

@@ -20,15 +20,19 @@ export default function RoomsComponent() {
 
   const dispatch = useDispatch();
 
+  /** Data from store */
   const rooms = useSelector(state => state.roomslice.list)
 
+  /**State to filter rooms */
   const [filteredRooms, setFilteredRooms] = useState([]);
 
   /**State to store modal status */
   const [open, setOpen] = useState(false)
 
+  /**State to store search data */
   const [searchText, setSearchText] = useState("");
 
+  /**State to store edited data */
   const [editRooms, setEditRooms] = useState([])
 
   const [options, setOptions] = useState([])
@@ -87,7 +91,7 @@ export default function RoomsComponent() {
   * @param {*} data 
   */
   const handleSaveRooms = (data) => {
-    // --- EDIT ---
+    /**EDIT */
     if (editRooms) {
 
       let updatedRooms = { ...editRooms, ...data };
@@ -102,12 +106,12 @@ export default function RoomsComponent() {
       localStorage.setItem("roomsdata", JSON.stringify(updatedStorage));
     }
 
-    // --- ADD ---
+     /**ADD */
     else {
       const newRoom = { id: uuidv4(), ...data };
 
       dispatch(addRooms(newRoom));
-      
+
       const updated = [...rooms, newRoom];
 
       localStorage.setItem("roomsdata", JSON.stringify(updated));

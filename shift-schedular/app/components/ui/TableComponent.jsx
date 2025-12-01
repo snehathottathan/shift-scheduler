@@ -8,7 +8,7 @@ export default function TableComponent({ columns, data, onDelete, onEdit, limit,
 
     useEffect(() => {
 
-        /**Reset to first page on new data */
+    /**Reset to first page on new data */
         setCurrentPage(1);
 
     }, [data, limit])
@@ -21,7 +21,7 @@ export default function TableComponent({ columns, data, onDelete, onEdit, limit,
 
     const safeData = Array.isArray(data) ? data : [];
 
-    // Get only the rows for the current page
+    /** Get only the rows for the current page */
     const paginatedData = safeData?.slice(
         (currentPage - 1) * limit,
         currentPage * limit

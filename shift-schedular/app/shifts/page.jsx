@@ -90,7 +90,7 @@ export default function ShiftComponent() {
    * @param {*} data 
    */
   const handleSaveShift = (data) => {
-    // --- EDIT ---
+    /**EDIT */
     if (editShift) {
       let updatedShift = { ...editShift, ...data };
 
@@ -104,7 +104,7 @@ export default function ShiftComponent() {
 
     }
 
-    // --- ADD ---
+    /**ADD */
     else {
 
       const newShift = { id: uuidv4(), ...data };
@@ -125,21 +125,21 @@ export default function ShiftComponent() {
    * 
    * @param {*} id 
    */
- const onDelete = useCallback((id) => {
+  const onDelete = useCallback((id) => {
 
     dispatch(deleteShift({ id: id }))
 
     let filteredData = shifts.filter((data) => data.id !== id)
 
     localStorage.setItem("shiftsdata", JSON.stringify(filteredData))
-    
+
   }, [dispatch, shifts]);
 
   /**
    * 
    * @param {*} id 
    */
-const onEdit = useCallback((id) => {
+  const onEdit = useCallback((id) => {
 
     setOpen(true);
 
