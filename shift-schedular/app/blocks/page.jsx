@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addBlock, updateBlock, deleteBlock, loadBlocksFromStorage } from '../../lib/features/block/blockSlice'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useCallback} from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -138,20 +138,20 @@ export default function BlocksComponent() {
    * 
    * @param {*} id 
    */
-  const onDelete = (id) => {
+  const onDelete = useCallback((id) => {
 
     dispatch(deleteBlock({ id: id }))
 
     let filteredData = blocks.filter((data) => data.id !== id)
 
     localStorage.setItem("blocksdata", JSON.stringify(filteredData))
-  }
+  }, [dispatch, blocks]);
 
   /**
    * 
    * @param {*} id 
    */
-  const onEdit = (id) => {
+ const onEdit = useCallback((id) => {
 
     setOpen(true);
 
@@ -159,7 +159,7 @@ export default function BlocksComponent() {
 
     setEditBlock(blockEdit || null);
 
-  };
+}, [blocks]);
 
 
   return (

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addRooms, updateRoom, deleteRoom, loadRoomsFromStorage } from '../../lib/features/room/roomSlice'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -90,8 +90,6 @@ export default function RoomsComponent() {
     // --- EDIT ---
     if (editRooms) {
 
-      console.log("daaasdaa", data);
-
       let updatedRooms = { ...editRooms, ...data };
 
       dispatch(updateRoom(updatedRooms));
@@ -109,9 +107,8 @@ export default function RoomsComponent() {
       const newRoom = { id: uuidv4(), ...data };
 
       dispatch(addRooms(newRoom));
+      
       const updated = [...rooms, newRoom];
-
-      console.log("daaasdaa", data);
 
       localStorage.setItem("roomsdata", JSON.stringify(updated));
     }
@@ -144,28 +141,30 @@ export default function RoomsComponent() {
    * 
    * @param {*} id 
    */
-  const onDelete = (id) => {
+  const onDelete = useCallback((id) => {
 
-    dispatch(deleteRoom({ id: id }))
+    dispatch(deleteRoom({ id }));
 
-    let filteredData = rooms.filter((data) => data.id !== id)
+    const filtered = rooms.filter(data => data.id !== id);
 
-    localStorage.setItem("roomsdata", JSON.stringify(filteredData))
-  }
+    localStorage.setItem("roomsdata", JSON.stringify(filtered));
+
+  }, [dispatch, rooms]);
 
   /**
    * 
    * @param {*} id 
    */
-  const onEdit = (id) => {
+  const onEdit = useCallback((id) => {
 
     setOpen(true);
 
-    const blockEdit = rooms.find(item => item.id === id);
+    const room = rooms.find(item => item.id === id);
 
-    setEditRooms(blockEdit || null);
+    setEditRooms(room || null);
 
-  };
+  }, [rooms]);
+
 
 
   return (

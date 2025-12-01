@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addShift, updateShift, deleteShift, loadShiftsFromStorage } from '../../lib/features/shift/shiftSlice'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -125,20 +125,21 @@ export default function ShiftComponent() {
    * 
    * @param {*} id 
    */
-  const onDelete = (id) => {
+ const onDelete = useCallback((id) => {
 
     dispatch(deleteShift({ id: id }))
 
     let filteredData = shifts.filter((data) => data.id !== id)
 
     localStorage.setItem("shiftsdata", JSON.stringify(filteredData))
-  }
+    
+  }, [dispatch, shifts]);
 
   /**
    * 
    * @param {*} id 
    */
-  const onEdit = (id) => {
+const onEdit = useCallback((id) => {
 
     setOpen(true);
 
@@ -146,7 +147,7 @@ export default function ShiftComponent() {
 
     setEditShift(shiftEdit || null);
 
-  };
+  }, [shifts]);
 
 
   return (

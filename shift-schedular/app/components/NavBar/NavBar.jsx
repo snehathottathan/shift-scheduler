@@ -5,19 +5,25 @@
 "use client";
 
 import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 
 import "./NavBar.scss";
 
 export const NavBar = () => {
+
   const pathname = usePathname();
+
   const linkClassName = "link";
+
   const activeClassName = "active";
 
   return (
+
     <nav className="nav">
      
       <div className="nav-div">
+        
         <div className="logo-div"></div>
 
         <Link
