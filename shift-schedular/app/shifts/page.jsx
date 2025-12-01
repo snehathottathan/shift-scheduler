@@ -1,3 +1,7 @@
+/**
+ * @author Sneha T
+ */
+
 "use client";
 
 import LazyTable from '../components/ui/LazyTable'
@@ -5,7 +9,7 @@ import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
 import { addShift, updateShift, deleteShift, loadShiftsFromStorage } from '../../lib/features/shift/shiftSlice'
 import { useEffect, useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
 export default function ShiftComponent() {
 
   const dispatch = useDispatch();
@@ -80,7 +84,7 @@ export default function ShiftComponent() {
   
   // --- ADD ---
   else {
-    const newShift = { id: Date.now(), ...data };
+    const newShift = { id: uuidv4(), ...data };
 
     dispatch(addShift(newShift));
 

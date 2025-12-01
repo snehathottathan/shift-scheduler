@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-
+import { v4 as uuidv4 } from 'uuid';
 /**Initial state to store room */
 const initialState = {
     list : []
@@ -17,7 +17,7 @@ const roomSlice = createSlice({
    reducers : {
 
     addRooms : (state, action) =>{
-        state.list.push({id: Date.now(),...action.payload})
+        state.list.push({id: uuidv4(),...action.payload})
     },
 
      loadRoomsFromStorage: (state, action) => {

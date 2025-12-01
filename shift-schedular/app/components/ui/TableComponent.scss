@@ -1,11 +1,14 @@
 table{
-    width: 100%;
-    padding: 44px;
+    width: 93%;
+    // width: 100%;
+      padding-top: 2rem;
 }
 td{
     text-align: left;
     border-bottom: 1px solid #E6E6EF;
         height: 40px;
+        color: #595959;
+         border-right: 1px solid #E6E6E6;
 }
 
 .actions{
@@ -16,6 +19,7 @@ td{
 tr{
     text-align: left;
         height: 40px;
+        border-right: 1px solid #E6E6E6;
 }
 
 tr:nth-child(odd) {
@@ -28,6 +32,7 @@ tr:nth-child(odd) {
 th{
     border-bottom: 1px solid #E6E6EF;
     text-align: left;
+    color: #2E2E2E;
 }
 
 .pagination {
@@ -36,8 +41,25 @@ th{
   justify-content: flex-end;
   gap: 10px;
   margin-right: 44px;
+  color: #59595999;
+  font-size: 14px;
 }
 
+.pagination-main{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px!important;
+    padding-top: 1rem;
+    width: 93%;
+}
+.pagination-buttons{
+    align-items: center;
+    // padding-right: 45px;
+}
+.page-button{
+        border: 0px;
+    color: #59595980;
+}
 .bi-pencil::before {
     align-items: center;
     /* display: flex; */
@@ -80,26 +102,17 @@ table tbody tr:hover {
     
     // 4. Highlight Color (Optional): Change the background for extra emphasis
     // This color will override the nth-child striping on hover only.
-    background-color: #e0f7ff !important; // A light blue highlight
+    // background-color: #e0f7ff !important; // A light blue highlight
 }
 
 /* IMPORTANT: If you are using alternating row colors, you might 
 need to adjust the specificity for the hover effect to work seamlessly. */
 
-/* Recommended fix for alternating row striping: */
-table tbody tr:nth-child(odd) td {
-    // Keep your striping rule
-    background-color: #fafafa; 
-}
-
-table tbody tr:nth-child(even) td {
-    // Keep your striping rule
-    background-color: #ffffff;
-}
 
 // Make sure the hover effect applies to the cells as well
 table tbody tr:hover td {
+     border-right: 1px solid #E6E6E6;
     // Apply the hover background to the cells
-    background-color: #ececec !important;
+    // background-color: #ececec !important;
     
 }

@@ -21,7 +21,8 @@ a {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-right: 44px;
+    width: 93%;
+
 }
 
 .add-button{

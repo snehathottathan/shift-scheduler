@@ -1,3 +1,7 @@
+/**
+ * @author Sneha T
+ */
+
 "use client";
 
 import LazyTable from '../components/ui/LazyTable'
@@ -5,9 +9,7 @@ import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
 import { addBlock,updateBlock,deleteBlock,loadBlocksFromStorage} from '../../lib/features/block/blockSlice'
 import { useEffect, useState } from "react";
-// import './shift.scss'
-import { usePathname } from "next/navigation";
-
+import { v4 as uuidv4 } from 'uuid';
 export default function BlocksComponent() {
 
   const dispatch = useDispatch();
@@ -19,8 +21,6 @@ export default function BlocksComponent() {
  const [searchText, setSearchText] = useState("");
 
  const [editBlock, setEditBlock] =useState([])
-
- const pathname = usePathname()
 
   /**
    * 
@@ -89,7 +89,7 @@ export default function BlocksComponent() {
   
   // --- ADD ---
   else {
-    const newBlock = { id: Date.now(), ...data };
+    const newBlock = { id: uuidv4(), ...data };
 
     dispatch(addBlock(newBlock));
 

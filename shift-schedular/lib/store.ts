@@ -3,11 +3,13 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import shiftSlice from "./features/shift/shiftSlice";
 import blockSlice from "./features/block/blockSlice";
 import roomSlice from "./features/room/roomSlice";
+import roomScheduleSlice from "./features/roomsschedule/roomScheduleSlice";
 // Combine reducers (shiftSlice + RTK Query slice)
 const rootReducer = combineSlices(
   shiftSlice,
   blockSlice,
-  roomSlice
+  roomSlice,
+  roomScheduleSlice
   // quotesApiSlice
 );
 

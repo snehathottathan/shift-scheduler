@@ -1,3 +1,7 @@
+/**
+ * @author Sneha T
+ */
+
 "use client";
 import { Suspense, lazy, useEffect } from "react";
 

@@ -1,3 +1,7 @@
+/**
+ * @author Sneha T
+ */
+
 "use client";
 
 import LazyTable from '../components/ui/LazyTable'
@@ -5,7 +9,7 @@ import ModalComponent from '../components/ui/ModalComponent'
 import { useDispatch, useSelector } from "react-redux";
 import { addRooms, updateRoom, deleteRoom, loadRoomsFromStorage } from '../../lib/features/room/roomSlice'
 import { useEffect, useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
 
 export default function RoomsComponent() {
 
@@ -23,15 +27,13 @@ export default function RoomsComponent() {
 
 
   /**
-   * 
+   * Handle Close of modal
    */
   const handleClose = () => {
     setOpen(false)
     setEditRooms(null);
-    console.log("rooms", rooms);
 
   }
-
 
   /**
    * 
@@ -47,7 +49,6 @@ export default function RoomsComponent() {
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      console.log("searchText", searchText);
 
       const value = searchText.toLowerCase();
 
@@ -66,8 +67,6 @@ export default function RoomsComponent() {
     return () => clearTimeout(delay);
   }, [searchText]);
 
-
-
   /**
   * 
   * @param {*} data 
@@ -75,6 +74,9 @@ export default function RoomsComponent() {
   const handleSaveRooms = (data) => {
     // --- EDIT ---
     if (editRooms) {
+
+      console.log("daaasdaa",data);
+      
       let updatedRooms = { ...editRooms, ...data };
 
       dispatch(updateRoom(updatedRooms));
@@ -83,19 +85,17 @@ export default function RoomsComponent() {
         s.id === updateRoom.id ? updateRoom : s
       );
 
+      
+
       localStorage.setItem("roomsdata", JSON.stringify(updatedStorage));
     }
 
     // --- ADD ---
     else {
-      const newRoom = { id: Date.now(), ...data };
+      const newRoom = { id: uuidv4(), ...data };
 
       dispatch(addRooms(newRoom));
-
       const updated = [...rooms, newRoom];
-
-      console.log("updated", updated);
-
 
       localStorage.setItem("roomsdata", JSON.stringify(updated));
     }
@@ -111,9 +111,6 @@ export default function RoomsComponent() {
     let parsedData = JSON.parse(data)
 
     setOptions(parsedData)
-
-        console.log("rommmsss",rooms);
-
 
   }, [])
 
@@ -135,8 +132,7 @@ export default function RoomsComponent() {
    * @param {*} id 
    */
   const onEdit = (id) => {
-    console.log("iidd");
-
+   
     setOpen(true);
     const blockEdit = rooms.find(item => item.id === id);
     setEditRooms(blockEdit || null);

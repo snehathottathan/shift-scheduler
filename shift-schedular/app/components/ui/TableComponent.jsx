@@ -82,18 +82,24 @@ export default function TableComponent({ columns, data, onDelete, onEdit, limit 
                 </tbody>
             </table>
             {/* Pagination Controls */}
-            <div className="pagination">
-                <button disabled={currentPage === 1} onClick={prevPage}>
-                    Prev
+            
+            <div className="pagination-main">
+                
+                <div className="pagination"> Showing {paginatedData.length} of {safeData.length}</div>
+                
+                <div className="pagination-buttons">
+                <button className="page-button" disabled={currentPage === 1} onClick={prevPage}>
+                    Previous
                 </button>
 
-                <span>
-                    Page {currentPage} of {totalPages}
+                <span style={{color:'#9575DE',backgroundColor:'#F7F3FF',width:'16px'}}>
+                    {currentPage} 
                 </span>
 
-                <button disabled={currentPage === totalPages} onClick={nextPage}>
+                <button className="page-button" disabled={currentPage === totalPages} onClick={nextPage}>
                     Next
                 </button>
+                </div>
             </div>
         </>
     )

@@ -1,3 +1,7 @@
+/**
+ * @author Sneha T
+ */
+
 "use client";
 
 import './ModalComponent.scss'
@@ -7,10 +11,6 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
 
     const [formData, setFormData] = useState({});
 
-    useEffect(()=>{
-
-console.log("optionsoptions",options);
-    },[])
 
     const handleChange = (e, name) => {
         setFormData(prev => ({
@@ -21,6 +21,8 @@ console.log("optionsoptions",options);
 
     const handleSave = (e) => {
         e.preventDefault();
+        console.log("formData",formData);
+        
         if (onSave) onSave(formData);
         onClose();
         setFormData({})
@@ -45,7 +47,7 @@ console.log("optionsoptions",options);
 
 
     return (
-        <div className="modal">
+        <div className="modal-custom">
             <div className="modal-box">
                 <div><b>{title}</b></div>
                 <form className='form-class'>
@@ -55,6 +57,8 @@ console.log("optionsoptions",options);
                             /** SELECT field */
                             if (field.type === "select") {
                                 return (
+                                 <>   {console.log("field",field.name)
+                                    }
                                     <select
                                         key={field.name}
                                         className="input-class"
@@ -70,6 +74,7 @@ console.log("optionsoptions",options);
                                             </option>
                                         ))}
                                     </select>
+                                    </>
                                 );
                             }
 

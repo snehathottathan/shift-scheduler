@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { v4 as uuidv4 } from 'uuid';
 /**Initial state to store block */
 const initialState = {
   list: []
@@ -18,7 +18,7 @@ const blockSlice = createSlice({
 
     addBlock: (state, action) => {
 
-      state.list.push({ id: Date.now(), ...action.payload })
+      state.list.push({ id: uuidv4(), ...action.payload })
     },
     
     loadBlocksFromStorage: (state, action) => {

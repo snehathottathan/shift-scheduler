@@ -1,0 +1,101 @@
+.room-schedule {
+  width: 58%;
+  overflow-x: auto;
+ 
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  border: 1px solid #cfcfcf;
+
+  th,
+  td {
+     text-align: center;
+    border: 1px solid #cfcfcf;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Block header (Old Building, New Building) */
+  .block-header {
+     text-align: center;
+    background-color: #e8e8e8;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  /* Room header cells */
+  .room-header {
+     text-align: center;
+    background-color: #f3f3f3;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /* Day header row (gray bar) */
+  .day-header {
+    justify-content: center;
+    display: flex;
+    background-color: #929292 !important;
+    color: white;
+    font-size: 15px;
+    text-align: left;
+    padding-left: 8px;
+  }
+
+  /* Shift label column */
+  .shift-cell {
+     text-align: center;
+    background-color: #f3f3f3;
+    font-weight: 500;
+    width: 120px;
+  }
+
+  /* Empty cells (yellow) */
+  .empty-cell {
+     text-align: center;
+    background-color: #f3e96b; /* soft yellow */
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #efe166;
+    }
+  }
+
+  /* Filled cells (green) */
+  .filled-cell {
+     text-align: center;
+    background-color: #7ed957; /* soft green */
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #74cf4f;
+    }
+  }
+
+  .assigned-wrapper {
+    
+     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+    .delete-x {
+      color: #b80000;
+      font-size: 13px;
+      margin-left: 6px;
+    }
+  }
+
+  .empty-header {
+     text-align: center;
+    background: transparent;
+    border: none;
+  }
+}

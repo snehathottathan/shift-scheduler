@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { v4 as uuidv4 } from 'uuid';
 /**Initial state to store shift */
 const initialState = {
   list: []
@@ -18,7 +18,7 @@ const shiftSlice = createSlice({
 
     addShift: (state, action) => {
 
-      state.list.push({ id: Date.now(), ...action.payload })
+      state.list.push({ id: uuidv4(), ...action.payload })
     },
     loadShiftsFromStorage: (state, action) => {
       state.list = action.payload;

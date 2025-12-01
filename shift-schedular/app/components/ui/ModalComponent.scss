@@ -1,4 +1,4 @@
-.modal {
+.modal-custom {
   position: fixed; // stays on screen above everything
   top: 0;
   left: 0;
@@ -65,4 +65,12 @@
     width: 112px;
     height: 35px;
     background-color: #9575DE;
+}
+.pagination-main{
+  // align-items: center;
+  //   text-align: center;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   padding-left: 46px;
+  //   color: #59595999;
 }
