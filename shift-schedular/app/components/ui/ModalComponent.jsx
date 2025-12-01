@@ -38,9 +38,7 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
     const handleSave = (e) => {
         
         e.preventDefault();
-        
-        console.log("formData",formData);
-        
+     
         if (onSave) onSave(formData);
 
         onClose();
@@ -180,6 +178,6 @@ export default function ModalComponent({ open, onClose, title, fields = [],optio
             </div>
 
         </div>
-        
+
     )
 }
